@@ -1,6 +1,6 @@
 import React from "react";
 import { useUserContext } from "../hooks/useUserContext";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 interface Rule {
   followers: number | number[];
@@ -14,7 +14,7 @@ const rules: Record<string, Rule> = {
   c: { followers: [5, 6], repositories: 5, stars: 3 },
   d: { followers: [3, 4], repositories: 3, stars: 2 },
   e: { followers: [1, 2], repositories: 1, stars: 1 },
-  f: { followers: [0], repositories: 0, stars: 0 },
+  f: { followers: 0, repositories: 0, stars: 0 },
 };
 
 function getNumStars(followers: number, repositories: number) {
@@ -23,6 +23,7 @@ function getNumStars(followers: number, repositories: number) {
   // map each rule
   for (const rule in rules) {
     const actualRule = rules[rule] as Rule;
+
     const verifyFollowers = Array.isArray(actualRule.followers)
       ? followers >= actualRule.followers[0] &&
         followers <= actualRule.followers[1]
@@ -32,7 +33,6 @@ function getNumStars(followers: number, repositories: number) {
 
     // check if the user matches the rules
     if (verifyFollowers && verifyRepositories) {
-      console.log("matching");
       return actualRule.stars;
     }
   }
@@ -48,21 +48,22 @@ interface StarRatingProps {
 const StarRating: React.FC<StarRatingProps> = ({ score }) => {
   const renderStars = () => {
     const stars = [];
+    const NumOfStars = 5;
     const fullStars = Math.floor(score);
     const hasHalfStar = score % 1 !== 0;
 
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(<FaStar className="h-7 w-7" key={i} />);
-    }
+    if (hasHalfStar) stars.push(<FaStarHalfAlt key="half" />);
 
-    if (hasHalfStar) {
-      stars.push(<FaStarHalfAlt key="half" />);
-    }
+    for (let i = 0; i < fullStars; i++)
+      stars.push(<FaStar className="h-8 w-8" key={i} />);
+
+    // fill the starts with blank stars
+    while (stars.length < NumOfStars) stars.push(<FaRegStar />);
 
     return stars;
   };
 
-  return <div className="flex gap-3">{renderStars()}</div>;
+  return <div className="flex gap-2">{renderStars()}</div>;
 };
 
 export function CalculateStars() {

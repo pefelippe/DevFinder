@@ -7,7 +7,7 @@ function UserProfile() {
   if (!userData) return;
 
   return (
-    <div className="grid grid-cols-2  justify-center text-lg font-normal bg-gray-50 p-8 rounded-md divide-black divide-x-2 max-w-2xl w-full mx-auto ">
+    <div className="grid grid-cols-2  justify-center text-lg font-normal bg-gray-50 p-8 rounded-3xl divide-black divide-x-2 max-w-2xl w-full mx-auto ">
       <div className="flex flex-col items-start gap-2 font-normal  justify-center pr-10">
         <img
           src={userData?.avatar_url}
@@ -15,7 +15,7 @@ function UserProfile() {
         />
         <div className="flex flex-col gap-3">
           <h1 className="text-2xl font-bold">{userData?.name}</h1>
-          {/* <p className="">{userData?.email}</p> */}
+          <p className="">{userData?.email}</p>
           <p className="">{userData?.location}</p>
         </div>
       </div>
