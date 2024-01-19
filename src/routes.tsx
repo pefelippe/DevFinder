@@ -1,10 +1,10 @@
 import { Route, Routes as AppRoutes } from "react-router-dom";
-import Searcher from "./pages/Searcher";
+import SearchGithubUsers from "./pages/SearchGithubUsers";
 
 function Routes() {
   return (
     <AppRoutes>
-      <Route path="/" element={<Searcher />} />
+      <Route path="/" element={<SearchGithubUsers />} />
     </AppRoutes>
   );
 }

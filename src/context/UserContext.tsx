@@ -1,30 +1,21 @@
-import { ReactNode, createContext, useContext, useState } from "react";
-import { getUserData } from "../api/getUserData";
-import { UserData } from "../interfaces/userData";
+import { ReactNode, createContext, useState } from "react";
+import { UserData, getUserData } from "../api/getUserData";
 
 interface UserContextType {
   userData: UserData | null;
-  updateUserData: (username: string) => void;
+  GetUserData: (username: string) => void;
 }
-
-const UserContext = createContext({} as UserContextType);
 
 interface TransactionProviderProps {
   children: ReactNode;
 }
 
-export const useUserContext = () => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error("useUserContext must be used within a UserProvider");
-  }
-  return context;
-};
+export const UserContext = createContext({} as UserContextType);
 
 export function UserProvider({ children }: TransactionProviderProps) {
   const [userData, setUserData] = useState<UserData | null>(null);
 
-  const updateUserData = async (username: string): Promise<void> => {
+  const GetUserData = async (username: string): Promise<void> => {
     try {
       const newUserData = await getUserData(username);
       setUserData(newUserData);
@@ -35,7 +26,7 @@ export function UserProvider({ children }: TransactionProviderProps) {
 
   const contextValue: UserContextType = {
     userData,
-    updateUserData,
+    GetUserData,
   };
 
   return (
