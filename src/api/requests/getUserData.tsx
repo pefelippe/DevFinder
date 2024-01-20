@@ -1,4 +1,4 @@
-import { api } from "../libs/axios";
+import { api } from "../axios";
 
 export interface UserData {
   name: string;
@@ -15,6 +15,5 @@ export interface UserData {
 
 export async function getUserData(username: string): Promise<UserData> {
   const response = await api.get(`/users/${username}`);
-  console.log(response.data);
   return response?.data;
 }

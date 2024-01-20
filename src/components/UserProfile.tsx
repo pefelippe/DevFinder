@@ -1,7 +1,8 @@
 import { FaBuilding } from "react-icons/fa";
-import { useUserContext } from "../hooks/useUserContext";
-import { CalculateStars } from "../useCases/calculateStars";
 import { FaMapLocation } from "react-icons/fa6";
+
+import { useUserContext } from "../hooks/useUserContext";
+import StarsRating from "./StarsRating";
 
 const UserInfo = ({ info, title }: { info: number; title: string }) => {
   return (
@@ -11,6 +12,7 @@ const UserInfo = ({ info, title }: { info: number; title: string }) => {
     </div>
   );
 };
+
 function UserProfile() {
   const { userData } = useUserContext();
 
@@ -18,17 +20,17 @@ function UserProfile() {
 
   return (
     <div
-      className="flex max-lg:flex-col justify-start text-lg max-lg:max-w-md w-full
-     bg-gray-50 rounded-3xl lg:w-fit mx-auto overflow-hidden "
+      className="flex max-lg:flex-col justify-start text-lg max-lg:max-w-xl lg:w-fit w-full
+     bg-gray-50 rounded-3xl  mx-auto overflow-hidden "
     >
       <img
         src={userData?.avatar_url}
         className="flex-shrink-1 object-cover w-full lg:max-w-sm max-lg:max-h-[250px] "
       />
 
-      <div className="flex flex-col items-start justify-between  gap-6 p-6 lg:p-10 w-full">
+      <div className="flex flex-col items-start justify-between  gap-6 p-6 lg:p-12 w-full">
         <div className="flex flex-col gap-3 w-full ">
-          <CalculateStars />
+          <StarsRating />
           <span>
             <div className="flex gap-2 items-center text-xl lg:text-3xl font-bold">
               {userData?.name}
@@ -51,7 +53,7 @@ function UserProfile() {
           )}
         </div>
 
-        <div className="flex items-start justify-between w-full">
+        <div className="flex items-start justify-start gap-10 w-full">
           <UserInfo info={userData?.followers} title="Followers" />
           <UserInfo info={userData?.following} title="Following" />
           <UserInfo info={userData?.public_repos} title="Repositories" />

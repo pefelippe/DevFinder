@@ -3,13 +3,13 @@ import UserProfile from "../components/UserProfile";
 
 function SearchGithubUsers() {
   return (
-    <div className="min-h-screen bg-gray-950 py-16 px-8 lg:px-20 flex items-center">
+    <div className="min-h-screen bg-gray-950 py-16 px-8 lg:p-24">
       <div className=" w-full mx-auto items-center flex flex-col gap-8 h-full  justify-center">
-        <p className="font-bold text-4xl text-slate-50 tracking-tighter">
+        <h1 className="font-bold text-4xl text-slate-50 tracking-tighter">
           Search Github Users
-        </p>
+        </h1>
 
-        <div className="flex flex-col gap-16 h-full w-full  ">
+        <div className="flex flex-col gap-24 h-full w-full  ">
           <Search />
           <UserProfile />
         </div>

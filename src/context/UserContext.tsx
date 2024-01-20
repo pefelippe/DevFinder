@@ -1,5 +1,6 @@
-import { ReactNode, createContext, useState } from "react";
-import { UserData, getUserData } from "../api/getUserData";
+import { createContext, ReactNode, useState } from "react";
+
+import { getUserData, UserData } from "../api/requests/getUserData";
 
 interface UserContextType {
   userData: UserData | null;
@@ -23,7 +24,7 @@ export function UserProvider({ children }: TransactionProviderProps) {
       console.error("Error fetching user data:", error);
     }
   };
-  
+
   const contextValue: UserContextType = {
     userData,
     GetUserData,
