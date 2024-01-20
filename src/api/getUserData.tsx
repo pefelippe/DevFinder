@@ -6,7 +6,11 @@ export interface UserData {
   location: string;
   avatar_url: string;
   followers: number;
+  following: number;
   public_repos: number;
+  bio: string;
+  company: string;
+  login: string;
 }
 
 export async function getUserData(username: string): Promise<UserData> {

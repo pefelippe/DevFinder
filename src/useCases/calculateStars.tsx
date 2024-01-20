@@ -52,13 +52,15 @@ const StarRating: React.FC<StarRatingProps> = ({ score }) => {
     const fullStars = Math.floor(score);
     const hasHalfStar = score % 1 !== 0;
 
-    if (hasHalfStar) stars.push(<FaStarHalfAlt key="half" />);
+    if (hasHalfStar)
+      stars.push(<FaStarHalfAlt key="half" className="h-7 w-7" />);
 
     for (let i = 0; i < fullStars; i++)
-      stars.push(<FaStar className="h-8 w-8" key={i} />);
+      stars.push(<FaStar className="h-7 w-7" key={i} />);
 
     // fill the starts with blank stars
-    while (stars.length < NumOfStars) stars.push(<FaRegStar />);
+    while (stars.length < NumOfStars)
+      stars.push(<FaRegStar className="h-7 w-7" />);
 
     return stars;
   };

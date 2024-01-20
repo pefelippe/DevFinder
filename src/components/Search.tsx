@@ -28,7 +28,7 @@ const Search: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col w-full gap-4 max-w-2xl mx-auto"
+      className="flex flex-col w-full gap-4 max-w-xl mx-auto"
     >
       <div className="flex  items-start justify-start gap-2  w-full">
         <input

@@ -23,7 +23,7 @@ export function UserProvider({ children }: TransactionProviderProps) {
       console.error("Error fetching user data:", error);
     }
   };
-
+  
   const contextValue: UserContextType = {
     userData,
     GetUserData,
