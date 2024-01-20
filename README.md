@@ -1,4 +1,4 @@
-![Captura de Tela](assets/screenshot.png)
+![Captura de Tela](./assets/screenshot.png)
 
 ### Desafio
 
