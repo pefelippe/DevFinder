@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  frontend:
+    build: .
+    container_name: gitsearchapp
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+    stdin_open: true
+    tty: true
