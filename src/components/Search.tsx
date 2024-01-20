@@ -20,10 +20,10 @@ const Search: React.FC = () => {
     resolver: zodResolver(schema),
   });
 
-  const { GetUserData } = useUserContext();
+  const { mutate } = useUserContext();
 
-  const onSubmit = async (data: FormValues) => {
-    GetUserData(data?.username);
+  const onSubmit = async ({ username }: FormValues) => {
+    mutate(username);
   };
 
   return (
@@ -31,23 +31,26 @@ const Search: React.FC = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col w-full gap-4 max-w-xl mx-auto"
     >
-      <div className="flex  items-start justify-start gap-2  w-full">
+      <div className="flex items-start justify-start gap-2 w-full">
         <input
           type="text"
-          placeholder={"Username"}
+          placeholder="Enter username"
           {...register("username")}
-          className={`border-2 border-gray-600  p-2 w-full rounded-md " ${
+          className={`border-2 border-gray-600 p-2 w-full rounded-md ${
             errors.username ? "border-red-500" : ""
           }`}
         />
 
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md px-12 font-medium text-lg w-fit hover:bg-blue-500/80 transition-all"
+          className="bg-blue-500 text-white p-2 rounded-md px-12 font-medium text-lg 
+          w-fit hover:bg-blue-500/80 transition-all"
         >
           Search
         </button>
       </div>
+
+      {/* <span className="text-white">{errors?.username?.message}</span> */}
     </form>
   );
 };

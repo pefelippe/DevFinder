@@ -7,13 +7,13 @@ import Routes from "./routes";
 
 function App() {
   return (
-    <BrowserRouter>
-      <UserProvider>
-        <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <UserProvider>
           <Routes />
-        </QueryClientProvider>
-      </UserProvider>
-    </BrowserRouter>
+        </UserProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

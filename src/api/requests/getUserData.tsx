@@ -13,7 +13,11 @@ export interface UserData {
   login: string;
 }
 
-export async function getUserData(username: string): Promise<UserData> {
+interface GetUserData {
+  username: string;
+}
+
+export async function getUserData({ username }: GetUserData): Promise<UserData> {
   const response = await api.get(`/users/${username}`);
   return response?.data;
 }

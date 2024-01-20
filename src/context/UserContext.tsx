@@ -1,33 +1,42 @@
-import { createContext, ReactNode, useState } from "react";
-
+import { createContext, ReactNode } from "react";
 import { getUserData, UserData } from "../api/requests/getUserData";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 
 interface UserContextType {
-  userData: UserData | null;
-  GetUserData: (username: string) => void;
+  data: UserData | undefined;
+  isPending: boolean;
+  isError: boolean;
+  error: AxiosError;
+  mutate: (username: string) => void;
 }
 
-interface TransactionProviderProps {
+interface UserProviderProps {
   children: ReactNode;
 }
 
 export const UserContext = createContext({} as UserContextType);
 
-export function UserProvider({ children }: TransactionProviderProps) {
-  const [userData, setUserData] = useState<UserData | null>(null);
+export function UserProvider({ children }: UserProviderProps) {
+  const queryClient = useQueryClient();
 
-  const GetUserData = async (username: string): Promise<void> => {
-    try {
-      const newUserData = await getUserData(username);
-      setUserData(newUserData);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
+  const mutation = useMutation<UserData, unknown, string>({
+    mutationFn: (username: string) => getUserData({ username }),
+    onSuccess: (data, username) => {
+      queryClient.setQueryData(["userData", username], data);
+    },
+  });
+
+  const { isPending, isError, data, mutate, error } = mutation;
+
+  const axiosError = error as AxiosError;
 
   const contextValue: UserContextType = {
-    userData,
-    GetUserData,
+    isPending,
+    isError,
+    data,
+    error: axiosError,
+    mutate,
   };
 
   return (
