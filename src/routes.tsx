@@ -1,10 +1,11 @@
 import { Route, Routes as AppRoutes, Navigate } from "react-router-dom";
-import SearchGithubUsers from "./pages/SearchGithubUsers";
+import HomePage from "./pages/HomePage";
+import React from "react";
 
 function Routes() {
   return (
     <AppRoutes>
-      <Route path="/" element={<SearchGithubUsers />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="*" element={<Navigate to="/" />} />
     </AppRoutes>
   );

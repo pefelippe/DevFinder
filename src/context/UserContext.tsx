@@ -1,7 +1,9 @@
-import { createContext, ReactNode } from "react";
-import { getUserData, UserData } from "../api/requests/getUserData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { createContext, ReactNode } from "react";
+import React from "react";
+
+import { getUserData, UserData } from "@api/requests/getUserData";
 
 interface UserContextType {
   data: UserData | undefined;
@@ -31,7 +33,6 @@ export function UserProvider({ children }: UserProviderProps) {
 
   const { isPending, isError, data, mutate, error } = mutation;
 
-  // Type-cast the error to AxiosError
   const axiosError = error as AxiosError;
 
   const contextValue: UserContextType = {
@@ -42,7 +43,6 @@ export function UserProvider({ children }: UserProviderProps) {
     mutate,
   };
 
-  // Provide the UserContext to the children components
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );

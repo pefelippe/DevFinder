@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useUserContext } from "../hooks/useUserContext";
+import { useUserData } from "@hooks/useUserData";
 
 const schema = z.object({
   username: z.string().min(1, { message: "Username is required." }),
@@ -19,7 +19,7 @@ const Search: React.FC = () => {
     resolver: zodResolver(schema),
   });
 
-  const { mutate } = useUserContext();
+  const { mutate } = useUserData();
 
   const onSubmit = async ({ username }: FormValues) => {
     mutate(username);
@@ -48,7 +48,6 @@ const Search: React.FC = () => {
         </button>
       </div>
 
-      {/* Display error message only if there's a validation error */}
       {errors.username?.message && (
         <span className="text-white">{errors.username.message}</span>
       )}

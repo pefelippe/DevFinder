@@ -1,11 +1,12 @@
-import { useUserContext } from "../hooks/useUserContext";
-import Stars from "./Stars";
+import React from "react";
+import { useUserData } from "@hooks/useUserData";
+import UserRating from "@components/UserRating";
 import CircularProgress from "@mui/material/CircularProgress";
 import { FaLocationPin } from "react-icons/fa6";
-import { UserData } from "../api/requests/getUserData";
+import { UserData } from "@api/requests/getUserData";
 import { FaEnvelope } from "react-icons/fa";
 
-const UserInfo = ({ info, title }: { info: number; title: string }) => {
+const UserNumbers = ({ info, title }: { info: number; title: string }) => {
   return (
     <div className="flex items-start font-normal text-xl gap-1 transition-all">
       <p className="font-medium">{info}</p>
@@ -35,14 +36,14 @@ const UserDetailsCard = (data: UserData) => {
       />
 
       <div className="flex flex-col gap-4 w-full font-light items-start justify-start text-xl p-8">
-        <Stars />
+        <UserRating />
         <div className="flex gap-2 items-center text-4xl font-bold">
           <p>{name ? name : "No Name."}</p>
         </div>
         <div className="flex max-lg:flex-col gap-4">
-          <UserInfo info={followers} title="followers" />
-          <UserInfo info={following} title="following" />
-          <UserInfo info={public_repos} title="repositories" />
+          <UserNumbers info={followers} title="followers" />
+          <UserNumbers info={following} title="following" />
+          <UserNumbers info={public_repos} title="repositories" />
         </div>
         <div className="flex gap-2 items-center">
           <p>{bio ? bio : "No bio."}</p>
@@ -63,7 +64,7 @@ const UserDetailsCard = (data: UserData) => {
 };
 
 const ErrorCard = () => {
-  const { error } = useUserContext();
+  const { error } = useUserData();
 
   return (
     <div className="flex flex-col items-center justify-center max-w-3xl w-full h-full mx-auto p-8 bg-gray-50 border-2 rounded-3xl text-center gap-2">
@@ -83,8 +84,8 @@ const ErrorCard = () => {
   );
 };
 
-function UserProfile() {
-  const { data, isError, isPending } = useUserContext();
+function UserInfo() {
+  const { data, isError, isPending } = useUserData();
 
   if (isPending) {
     return (
@@ -105,4 +106,4 @@ function UserProfile() {
   return <></>;
 }
 
-export default UserProfile;
+export default UserInfo;

@@ -1,5 +1,6 @@
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { useRating } from "../hooks/useRating";
+import { useUserRating } from "@hooks/useUserRating";
+import React from "react";
 
 type RenderStarsProps = {
   rating: number;
@@ -31,7 +32,7 @@ const renderStars = ({ rating }: RenderStarsProps) => {
 };
 
 const StarsRating = () => {
-  const rating = useRating();
+  const rating = useUserRating();
 
   return <div className="flex gap-3 text-4xl">{renderStars({ rating })}</div>;
 };

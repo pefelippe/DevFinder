@@ -1,4 +1,4 @@
-![Captura de Tela](./assets/Screenshot.png)
+![Captura de Tela](./public/assets/Screenshot.png)
 
 ### Desafio
 
@@ -18,7 +18,9 @@ O docker compose utiliza o dockerfile padrao. Ele irá buildar o projeto e servi
 
 #### Buildando diretamente via docker
 
-Voce tambem pode buildar diretamente as imagems. Existem dois dockerfiles. Caso queria rodar o projeto em dev mode, especifique o dockerfile.dev:
+Voce tambem pode buildar diretamente as imagens.
+
+Caso queria rodar o projeto em dev mode, especifique o dockerfile.dev:
 
 ```
   docker build -f Dockerfile.dev -t <nome-do-projeto> .
