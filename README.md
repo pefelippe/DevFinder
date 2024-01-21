@@ -13,7 +13,7 @@ Além disso, será necessário construir um ranking de popularidade dos usuário
 O docker compose utiliza o dockerfile padrao. Ele irá buildar o projeto e servir na porta 8080.
 
 ```
-  docker-compose up
+  docker-compose up --build
 ```
 
 #### Buildando diretamente via docker

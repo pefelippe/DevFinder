@@ -1,8 +1,7 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext } from "../hooks/useUserContext";
 
 const schema = z.object({
@@ -43,14 +42,16 @@ const Search: React.FC = () => {
 
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md px-12 font-medium text-lg 
-          w-fit hover:bg-blue-500/80 transition-all"
+          className="bg-blue-500 text-white p-2 rounded-md px-12 font-medium text-lg w-fit hover:bg-blue-500/80 transition-all"
         >
           Search
         </button>
       </div>
 
-      {/* <span className="text-white">{errors?.username?.message}</span> */}
+      {/* Display error message only if there's a validation error */}
+      {errors.username?.message && (
+        <span className="text-white">{errors.username.message}</span>
+      )}
     </form>
   );
 };

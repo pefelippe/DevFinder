@@ -1,13 +1,12 @@
 import { useUserContext } from "../hooks/useUserContext";
 
 interface Rule {
-  followers: number | number[];
+  followers: number | [number, number];
   public_repos: number;
   stars: number;
 }
 
 const DEFAULT_STARS = 0.5;
-
 const EMPTY_STARS = 0;
 
 const rules: Record<string, Rule> = {
@@ -21,12 +20,14 @@ const rules: Record<string, Rule> = {
 export function useRating() {
   const { data } = useUserContext();
 
+  // Return empty stars if user data is not available or followers/public_repos are both zero
   if (!data || (data.followers === 0 && data.public_repos === 0)) {
     return EMPTY_STARS;
   }
 
   const { followers, public_repos } = data;
 
+  // Iterate through the rules to find a matching rule
   for (const ruleKey in rules) {
     const rule = rules[ruleKey];
     const {
@@ -35,21 +36,26 @@ export function useRating() {
       stars,
     } = rule;
 
+    // Check if the user's followers are within the specified range (if it's an array)
     const followersInRange =
       Array.isArray(ruleFollowers) &&
       followers >= ruleFollowers[0] &&
       followers <= ruleFollowers[1];
 
+    // Verify the followers rule based on whether it's a range or a single value
     const verifyFollowersRule = Array.isArray(ruleFollowers)
       ? followersInRange
       : followers >= ruleFollowers;
 
+    // Verify the public_repos rule
     const verifyPublicReposRule = public_repos >= rulePublicRepos;
 
+    // If both followers and public_repos rules are satisfied, return the stars for that rule
     if (verifyFollowersRule && verifyPublicReposRule) {
       return stars;
     }
   }
 
+  // If no rules match, return the default stars
   return DEFAULT_STARS;
 }

@@ -20,8 +20,10 @@ export const UserContext = createContext({} as UserContextType);
 export function UserProvider({ children }: UserProviderProps) {
   const queryClient = useQueryClient();
 
+  // Use `useMutation` hook to handle API mutations
   const mutation = useMutation<UserData, unknown, string>({
     mutationFn: (username: string) => getUserData({ username }),
+    // Update the query cache on successful mutation
     onSuccess: (data, username) => {
       queryClient.setQueryData(["userData", username], data);
     },
@@ -29,6 +31,7 @@ export function UserProvider({ children }: UserProviderProps) {
 
   const { isPending, isError, data, mutate, error } = mutation;
 
+  // Type-cast the error to AxiosError
   const axiosError = error as AxiosError;
 
   const contextValue: UserContextType = {
@@ -39,6 +42,7 @@ export function UserProvider({ children }: UserProviderProps) {
     mutate,
   };
 
+  // Provide the UserContext to the children components
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
