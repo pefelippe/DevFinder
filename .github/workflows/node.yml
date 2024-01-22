@@ -1,4 +1,4 @@
-name: Build & Test
+name: Build & Test - Yarn
 
 on:
   push:
@@ -18,8 +18,14 @@ jobs:
         with:
           node-version: 16
 
-      - name: Install dependencies, build, and test
+      - name: Install dependencies
         run: |
-          npm install
-          npm run build 
-          npm run test
+          yarn
+
+      - name: Build
+        run: |
+          yarn build
+
+      - name: Test
+        run: |
+          yarn test
