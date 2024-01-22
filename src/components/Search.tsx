@@ -28,29 +28,25 @@ const Search: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col w-full gap-4 max-w-xl mx-auto"
+      className="flex flex-col gap-4 w-full h-full rounded-xl  "
     >
-      <div className="flex items-start justify-start gap-2 w-full">
+      <div className="flex h-full items-center justify-center gap-4 w-full  mx-auto">
         <input
           type="text"
           placeholder="Enter username"
           {...register("username")}
-          className={`border-2 border-gray-600 p-2 w-full rounded-md ${
+          className={`border-2 border-gray-600 p-3 w-full rounded-md ${
             errors.username ? "border-red-500" : ""
           }`}
         />
 
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded-md px-12 font-medium text-lg w-fit hover:bg-blue-500/80 transition-all"
+          className="bg-blue-600 text-white p-3 rounded-md px-12 font-medium text-lg w-fit hover:bg-blue-500/80 transition-all"
         >
           Search
         </button>
       </div>
-
-      {errors.username?.message && (
-        <span className="text-white">{errors.username.message}</span>
-      )}
     </form>
   );
 };

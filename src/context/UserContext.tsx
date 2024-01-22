@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useEffect } from "react";
 import React from "react";
 
 import { getUserData, UserData } from "@api/requests/getUserData";
@@ -42,6 +42,10 @@ export function UserProvider({ children }: UserProviderProps) {
     error: axiosError,
     mutate,
   };
+
+  useEffect(() => {
+    mutate("github");
+  }, [mutate]);
 
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

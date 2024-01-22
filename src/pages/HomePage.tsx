@@ -1,17 +1,16 @@
 import React from "react";
-import UserSearchForm from "@components/UserSearchForm";
+import Search from "@components/Search";
 import UserInfo from "@components/UserInfo";
 
 function HomePage() {
   return (
-    <main className="min-h-screen bg-gray-950 p-8 lg:py-[15vh] gap-16 flex flex-col">
-      <div className="w-full mx-auto items-center flex flex-col gap-8 h-full justify-center">
-        <h1 className="font-bold text-5xl tracking-tighter text-gray-50">
-          Search Github Users
+    <main className="min-h-screen p-8 lg:py-[15vh] gap-6 lg:gap-12 flex flex-col items-center justify-start">
+      <div className="w-full mx-auto flex-col items-start flex text-center gap-6 h-full justify-center max-w-4xl rounded-xl">
+        <h1 className="font-bold text-3xl tracking-[1px] text-gray-950">
+          Github Searcher
         </h1>
-        <UserSearchForm />
+        <Search />
       </div>
-
       <UserInfo />
     </main>
   );

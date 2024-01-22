@@ -34,7 +34,11 @@ const renderStars = ({ rating }: RenderStarsProps) => {
 const StarsRating = () => {
   const rating = useUserRating();
 
-  return <div className="flex gap-3 text-4xl">{renderStars({ rating })}</div>;
+  return (
+    <div className="flex gap-3 text-4xl text-[#fca311]">
+      {renderStars({ rating })}
+    </div>
+  );
 };
 
 export default StarsRating;
