@@ -24,9 +24,9 @@ export function UserProvider({ children }: UserProviderProps) {
   // Use `useMutation` hook to handle API mutations
   const mutation = useMutation<UserData, unknown, string>({
     mutationFn: (username: string) => getUserData({ username }),
-    // Update the query cache on successful mutation
+
     onSuccess: (data, username) => {
-      queryClient.setQueryData(["userData", username], data);
+      queryClient.setQueryData(["userData", username], data); // Update the query cache on successful mutation
     },
   });
 
@@ -38,7 +38,7 @@ export function UserProvider({ children }: UserProviderProps) {
     isPending,
     isError,
     data,
-    error: axiosError,	
+    error: axiosError,
     mutate,
   };
 

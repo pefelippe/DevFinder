@@ -20,44 +20,31 @@ export const rules: Record<string, Rule> = {
 };
 
 const calculateRating = (data: UserData | undefined) => {
-  // Return empty stars if user data is not available or followers/public_repos are both zero
   if (!data || (data.followers === 0 && data.public_repos === 0)) {
     return EMPTY_STARS;
   }
 
   const { followers, public_repos } = data;
 
-  // Iterate through the rules to find a matching rule
-  for (const ruleKey in rules) {
-    const rule = rules[ruleKey];
-    const {
-      followers: ruleFollowers,
-      public_repos: rulePublicRepos,
-      stars,
-    } = rule;
+  const rule = Object.values(rules).find(
+    ({ followers: ruleFollowers, public_repos: rulePublicRepos }) => {
 
-    // Check if the user's followers are within the specified range (if it's an array)
-    const followersInRange =
-      Array.isArray(ruleFollowers) &&
-      followers >= ruleFollowers[0] &&
-      followers <= ruleFollowers[1];
+      const followersInRange =
+        Array.isArray(ruleFollowers) &&
+        followers >= ruleFollowers[0] &&
+        followers <= ruleFollowers[1];
 
-    // Verify the followers rule based on whether it's a range or a single value
-    const verifyFollowersRule = Array.isArray(ruleFollowers)
-      ? followersInRange
-      : followers >= ruleFollowers;
+      const verifyFollowersRule = Array.isArray(ruleFollowers)
+        ? followersInRange
+        : followers >= ruleFollowers;
 
-    // Verify the public_repos rule
-    const verifyPublicReposRule = public_repos >= rulePublicRepos;
-
-    // If both followers and public_repos rules are satisfied, return the stars for that rule
-    if (verifyFollowersRule && verifyPublicReposRule) {
-      return stars;
+      const verifyPublicReposRule = public_repos >= rulePublicRepos;
+      
+      return verifyFollowersRule && verifyPublicReposRule;
     }
-  }
+  );
 
-  // If no rules match, return the default stars
-  return DEFAULT_STARS;
+  return rule ? rule.stars : DEFAULT_STARS;
 };
 
 export function useUserRating() {

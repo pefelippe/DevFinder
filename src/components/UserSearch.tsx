@@ -11,14 +11,7 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const UserSearch: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-  });
-
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver: zodResolver(schema) });
   const { mutate } = useUserData();
 
   const onSubmit = async ({ username }: FormValues) => {
@@ -26,18 +19,13 @@ const UserSearch: React.FC = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-1 w-full h-full rounded-xl   mx-auto"
-    >
-      <div className="flex h-full items-start justify-center gap-4 w-full  mx-auto max-md:flex-col">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1 w-full h-full rounded-xl mx-auto">
+      <div className="flex h-full items-start justify-center gap-4 w-full mx-auto max-md:flex-col">
         <input
           type="text"
           placeholder="Enter username"
           {...register("username")}
-          className={`border-2 border-gray-600 p-3 w-full rounded-md ${
-            errors.username ? "border-red-500" : ""
-          }`}
+          className={`border-2 border-gray-600 p-3 w-full rounded-md ${errors.username ? "border-red-500" : ""}`}
         />
         <button
           type="submit"
