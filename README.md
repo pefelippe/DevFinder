@@ -1,4 +1,6 @@
 ![Captura de Tela](./public/assets/Screenshot.png)
+![Captura de Tel2a](./public/assets/Card.png)
+![Captura de Tel2a](./public/assets/CardNotExist.png)
 
 # GitSearcher
 
@@ -92,7 +94,9 @@ O ranking de popularidade deve se comportar com base nas seguintes regras:
 Recomendações
 
 - Defina e utilize padrões de projeto para estruturação de uma arquitetura de código limpo e organizado.
-  Itens obrigatórios
+
+Itens obrigatórios
+
 - Utilize a biblioteca react para construção da aplicação
 - Utilize Typescript
 - Testes unitários com react-testing-library
