@@ -4,11 +4,11 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN npm install
+RUN yarn
 
 COPY . . 
 
-RUN npm run build
+RUN yarn build
 
 FROM node:18-alpine as PRODUCTION_IMAGE
 
@@ -20,11 +20,11 @@ COPY package.json .
 
 COPY vite.config.ts .
 
-RUN npm install typescript
+RUN yarn add typescript
 
 EXPOSE 8080
 
-CMD ["npm", "run", "preview"]
+CMD ["yarn", "preview"]
 
 
 
