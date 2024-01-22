@@ -22,7 +22,9 @@ describe("UserInfo", () => {
     expect(errorCard).toBeInTheDocument();
     expect(screen.getByText("Failed to Retrieve User 😞")).toBeInTheDocument();
     expect(
-      screen.getByText("Please double-check the username or try again later.")
+      screen.getByText(
+        "We apologize for the inconvenience. Please double-check the username or try again later."
+      )
     ).toBeInTheDocument();
   });
 
@@ -62,7 +64,7 @@ describe("UserInfo", () => {
     expect(screen.getByText("John Doe")).toBeInTheDocument();
     expect(screen.getByText("Software Developer")).toBeInTheDocument();
     expect(screen.getByText("Followers")).toBeInTheDocument();
-    expect(screen.getByText("Repositories")).toBeInTheDocument();
+    expect(screen.getByText("Repos")).toBeInTheDocument();
     expect(screen.getByAltText("User Avatar")).toHaveAttribute(
       "src",
       "https://example.com/avatar.jpg"

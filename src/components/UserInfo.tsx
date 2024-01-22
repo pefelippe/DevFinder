@@ -76,11 +76,11 @@ const UserDetailsCard = (data: UserData) => {
     >
       <img
         src={avatar_url}
-        className="object-cover w-36 h-36 rounded-full "
+        className="object-cover w-36 h-36 rounded-full border"
         alt="User Avatar"
       />
 
-      <div className="flex flex-col gap-6 w-fit font-light items-start justify-between text-xl mx-auto max-w-lg   max-md:items-center  max-md:justify-center">
+      <div className="flex flex-col gap-6 w-full font-light items-start justify-between text-xl mx-auto max-w-lg   max-md:items-center  max-md:justify-center">
         <div className="flex flex-col gap-2 max-md:items-center max-md:text-center">
           <UserRating />
           <div className="">
@@ -120,17 +120,18 @@ const ErrorCard = () => {
   return (
     <div
       data-testid="error-card"
-      className="flex flex-col items-center justify-center max-w-3xl w-full h-full mx-auto min-h-[384px] bg-gray-50 border-2 rounded-3xl text-center gap-6 p-8"
+      className="flex flex-col items-center justify-center max-w-3xl w-full h-full mx-auto min-h-[384px]
+       bg-gray-50 border-2 rounded-3xl text-center gap-6 p-8"
     >
-      <h1 className="text-5xl font-bold text-red-600 mb-4">
+      <h1 className="text-5xl font-bold text-red-600 mb-2">
         Failed to Retrieve User 😞
       </h1>
-      <p className="text-xl font-medium text-gray-700 max-w-md">
+      <p className="text-xl font-medium text-gray-700 max-w-sm">
         We apologize for the inconvenience. Please double-check the username or
         try again later.
       </p>
       {error && (
-        <div className="max-w-md text-xl font-normal text-red-600 mt-4">
+        <div className="max-w-md text-xl font-normal text-red-600 mt-2">
           <p>{error.message}</p>
         </div>
       )}
