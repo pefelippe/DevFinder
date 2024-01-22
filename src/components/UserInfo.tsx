@@ -62,12 +62,12 @@ const UserDetailsCard = (data: UserData) => {
   return (
     <div
       data-testid="user-details-card"
-      className=" flex max-md:flex-col justify-start text-lg border-2
+      className=" flex max-md:flex-col justify-start text-lg
     max-w-4xl w-full bg-gray-50  rounded-xl mx-auto overflow-hidden"
     >
       <img
         src={avatar_url}
-        className="object-cover w-full md:max-w-sm max-md:max-h-[250px] z-30 "
+        className="object-cover w-full md:max-w-sm max-md:max-h-[300px] z-30 "
         alt="User Avatar"
       />
 
@@ -77,11 +77,11 @@ const UserDetailsCard = (data: UserData) => {
 
           <p className=" text-4xl font-bold">{name ? name : "No Name."}</p>
 
-          <div className="grid grid-cols-2 w-fit gap-4 ">
+          <p className="">{bio ? bio : "No bio."}</p>
+          <div className="grid grid-cols-2 w-fit ">
             <UserNumbers num={followers} title="Followers" />
             <UserNumbers num={public_repos} title="Repositories" />
           </div>
-          <p className="">{bio ? bio : "No bio."}</p>
 
           <div className="grid grid-cols-1 gap-3 items-start font-light pt-4 ">
             <div className="flex gap-3 items-center text-lg">
@@ -106,7 +106,7 @@ const ErrorCard = () => {
   return (
     <div
       data-testid="error-card"
-      className="flex flex-col items-center justify-center max-w-4xl w-full h-full mx-auto p-10 py-20
+      className="flex flex-col items-center justify-center max-w-4xl w-full h-full mx-auto min-h-[384px]
      bg-gray-50 border-2 rounded-3xl text-center gap-6"
     >
       <h1 className="text-5xl font-bold text-red-600">
@@ -126,7 +126,7 @@ const ErrorCard = () => {
 
 const LoadingIndicator = () => {
   return (
-    <div className="mx-auto" data-testid="loading-indicator">
+    <div className="mx-auto  min-h-[384px]" data-testid="loading-indicator">
       <CircularProgress />
     </div>
   );

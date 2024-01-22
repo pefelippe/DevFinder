@@ -28,9 +28,9 @@ const UserSearch: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-4 w-full h-full rounded-xl  "
+      className="flex flex-col gap-1 w-full h-full rounded-xl   mx-auto"
     >
-      <div className="flex h-full items-center justify-center gap-4 w-full  mx-auto max-md:flex-col">
+      <div className="flex h-full items-start justify-center gap-4 w-full  mx-auto max-md:flex-col">
         <input
           type="text"
           placeholder="Enter username"
