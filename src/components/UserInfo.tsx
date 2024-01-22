@@ -1,16 +1,56 @@
-import React from "react";
-import { useUserData } from "@hooks/useUserData";
-import UserRating from "@components/UserRating";
-import CircularProgress from "@mui/material/CircularProgress";
-import { FaLocationPin } from "react-icons/fa6";
 import { UserData } from "@api/requests/getUserData";
+import { useUserData } from "@hooks/useUserData";
+import { useUserRating } from "@hooks/useUserRating";
+import CircularProgress from "@mui/material/CircularProgress";
+import React from "react";
 import { FaEnvelope } from "react-icons/fa";
+import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { FaLocationPin } from "react-icons/fa6";
+
+type RenderStarsProps = {
+  rating: number;
+};
+
+const renderStars = ({ rating }: RenderStarsProps) => {
+  const stars = [];
+  const numOfStars = 5;
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
+
+  // Fill the stars array with blank stars
+  while (stars.length < numOfStars) {
+    stars.push(<FaRegStar key={stars.length} className="star-icon" />);
+  }
+
+  // Replace the first star with a half star if needed
+  if (hasHalfStar) {
+    stars[0] = <FaStarHalfAlt key={stars.length} className="star-icon" />;
+    return stars;
+  }
+
+  // Replace the stars array with full stars
+  for (let i = 0; i < fullStars; i++) {
+    stars[i] = <FaStar key={stars.length} className="star-icon" />;
+  }
+
+  return stars;
+};
 
 const UserNumbers = ({ num, title }: { num: number; title: string }) => {
   return (
-    <div className="flex gap-2 ">
-      <p className="font-semibold ">{num}</p>
+    <div className="flex gap-2">
+      <p className="font-semibold">{num}</p>
       <div className=" tracking-tight">{title}</div>
+    </div>
+  );
+};
+
+const UserRating = () => {
+  const rating = useUserRating();
+
+  return (
+    <div className="flex gap-3 text-4xl text-[#fca311]">
+      {renderStars({ rating })}
     </div>
   );
 };
@@ -21,6 +61,7 @@ const UserDetailsCard = (data: UserData) => {
 
   return (
     <div
+      data-testid="user-details-card"
       className=" flex max-md:flex-col justify-start text-lg border-2
     max-w-4xl w-full bg-gray-50  rounded-xl mx-auto overflow-hidden"
     >
@@ -64,6 +105,7 @@ const ErrorCard = () => {
 
   return (
     <div
+      data-testid="error-card"
       className="flex flex-col items-center justify-center max-w-4xl w-full h-full mx-auto p-10 py-20
      bg-gray-50 border-2 rounded-3xl text-center gap-6"
     >
@@ -82,17 +124,19 @@ const ErrorCard = () => {
   );
 };
 
+const LoadingIndicator = () => {
+  return (
+    <div className="mx-auto" data-testid="loading-indicator">
+      <CircularProgress />
+    </div>
+  );
+};
+
 function UserInfo() {
   const { data, isError, isPending } = useUserData();
 
-  if (isPending) {
-    <div className="mx-auto">
-      <CircularProgress />
-    </div>;
-  }
-
   if (isError) return <ErrorCard />;
-
+  if (isPending) return <LoadingIndicator />;
   if (data) return <UserDetailsCard {...data} />;
 
   return <></>;

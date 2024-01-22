@@ -1,15 +1,14 @@
+import { getUserData, UserData } from "@api/requests/getUserData";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { createContext, ReactNode, useEffect } from "react";
 import React from "react";
 
-import { getUserData, UserData } from "@api/requests/getUserData";
-
 interface UserContextType {
   data: UserData | undefined;
   isPending: boolean;
   isError: boolean;
-  error: AxiosError;
+  error?: AxiosError;
   mutate: (username: string) => void;
 }
 
@@ -39,7 +38,7 @@ export function UserProvider({ children }: UserProviderProps) {
     isPending,
     isError,
     data,
-    error: axiosError,
+    error: axiosError,	
     mutate,
   };
 

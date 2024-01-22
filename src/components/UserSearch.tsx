@@ -1,8 +1,8 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useUserData } from "@hooks/useUserData";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useUserData } from "@hooks/useUserData";
 
 const schema = z.object({
   username: z.string().min(1, { message: "Username is required." }),
@@ -10,7 +10,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-const Search: React.FC = () => {
+const UserSearch: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -30,7 +30,7 @@ const Search: React.FC = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-4 w-full h-full rounded-xl  "
     >
-      <div className="flex h-full items-center justify-center gap-4 w-full  mx-auto">
+      <div className="flex h-full items-center justify-center gap-4 w-full  mx-auto max-md:flex-col">
         <input
           type="text"
           placeholder="Enter username"
@@ -39,7 +39,6 @@ const Search: React.FC = () => {
             errors.username ? "border-red-500" : ""
           }`}
         />
-
         <button
           type="submit"
           className="bg-blue-600 text-white p-3 rounded-md px-12 font-medium text-lg w-fit hover:bg-blue-500/80 transition-all"
@@ -51,4 +50,4 @@ const Search: React.FC = () => {
   );
 };
 
-export default Search;
+export default UserSearch;

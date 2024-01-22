@@ -10,14 +10,15 @@
     "esModuleInterop": true,
     "module": "ESNext",
     "skipLibCheck": true,
-    /* Bundler mode */
+    "types": [
+      "@types/jest"
+    ],
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

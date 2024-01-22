@@ -1,6 +1,6 @@
-import React from "react";
-import Search from "@components/Search";
 import UserInfo from "@components/UserInfo";
+import UserSearch from "@components/UserSearch";
+import React from "react";
 
 function HomePage() {
   return (
@@ -9,7 +9,7 @@ function HomePage() {
         <h1 className="font-bold text-3xl tracking-[1px] text-gray-950">
           Github Searcher
         </h1>
-        <Search />
+        <UserSearch />
       </div>
       <UserInfo />
     </main>

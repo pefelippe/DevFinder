@@ -1,3 +1,4 @@
+import { UserData } from "@api/requests/getUserData";
 import { useUserData } from "@hooks/useUserData";
 
 interface Rule {
@@ -6,11 +7,11 @@ interface Rule {
   stars: number;
 }
 
-const DEFAULT_STARS = 0.5;
+export const DEFAULT_STARS = 0.5;
 
-const EMPTY_STARS = 0;
+export const EMPTY_STARS = 0;
 
-const rules: Record<string, Rule> = {
+export const rules: Record<string, Rule> = {
   a: { followers: 10, public_repos: 8, stars: 5 },
   b: { followers: [7, 9], public_repos: 7, stars: 4 },
   c: { followers: [5, 6], public_repos: 5, stars: 3 },
@@ -18,9 +19,7 @@ const rules: Record<string, Rule> = {
   e: { followers: [1, 2], public_repos: 1, stars: 1 },
 };
 
-export function useUserRating() {
-  const { data } = useUserData();
-
+const calculateRating = (data: UserData | undefined) => {
   // Return empty stars if user data is not available or followers/public_repos are both zero
   if (!data || (data.followers === 0 && data.public_repos === 0)) {
     return EMPTY_STARS;
@@ -59,4 +58,10 @@ export function useUserRating() {
 
   // If no rules match, return the default stars
   return DEFAULT_STARS;
+};
+
+export function useUserRating() {
+  const { data } = useUserData();
+  const rating = calculateRating(data);
+  return rating;
 }
