@@ -11,7 +11,11 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 const UserSearch: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver: zodResolver(schema) });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>({ resolver: zodResolver(schema) });
   const { mutate } = useUserData();
 
   const onSubmit = async ({ username }: FormValues) => {
@@ -19,17 +23,22 @@ const UserSearch: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1 w-full h-full rounded-xl mx-auto">
-      <div className="flex h-full items-start justify-center gap-4 w-full mx-auto max-md:flex-col">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-1 w-full h-full rounded-xl mx-auto  shadow"
+    >
+      <div className="flex h-full items-start justify-center gap-3 w-full mx-auto max-md:flex-col">
         <input
           type="text"
-          placeholder="Enter username"
+          placeholder="Search a github username"
           {...register("username")}
-          className={`border-2 border-gray-600 p-3 w-full rounded-md ${errors.username ? "border-red-500" : ""}`}
+          className={`p-3 w-full rounded-md bg-gray-200 border-2 ${
+            errors.username ? "" : ""
+          }`}
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white p-3 rounded-md px-12 font-medium text-lg w-fit hover:bg-blue-500/80 transition-all"
+          className="bg-blue-600  text-white p-3 px-4 rounded-md  font-medium text-lg w-fit hover:bg-blue-500/80 transition-all"
         >
           Search
         </button>

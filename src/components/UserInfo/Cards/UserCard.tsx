@@ -1,8 +1,8 @@
-import React from "react";
 import { UserData } from "@api/requests/getUserData";
+import { useUserRating } from "@hooks/useUserRating";
+import React from "react";
 import { FaEnvelope, FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { FaLocationPin } from "react-icons/fa6";
-import { useUserRating } from "@hooks/useUserRating";
 
 type RenderStarsProps = {
   rating: number;
@@ -68,26 +68,35 @@ export const UserCard = (data: UserData) => {
   return (
     <div
       data-testid="user-details-card"
-      className=" flex max-md:flex-col justify-between text-lg border-2 p-8 w-full max-md:items-center
-     max-w-3xl bg-gray-50  rounded-xl mx-auto overflow-hidden gap-6 md:gap-8"
+      className=" flex max-md:flex-col justify-between text-lg  p-8 w-full max-md:items-center shadow
+     max-w-3xl bg-white  rounded-xl mx-auto overflow-hidden gap-6 md:gap-8"
     >
-      <img
-        src={avatar_url}
-        className="object-cover w-36 h-36 rounded-full border"
-        alt="User Avatar"
-      />
-
-      <div className="flex flex-col gap-6 w-full font-light items-start justify-between text-xl mx-auto max-w-lg   max-md:items-center  max-md:justify-center">
-        <div className="flex flex-col gap-2 max-md:items-center max-md:text-center">
-          <UserRating />
-          <div className="">
-            <p className=" text-4xl font-bold">{name ? name : "No Name."}</p>{" "}
-            <p className=" text-lg text-blue-500 font-medium ">
-              @{login ? login : "No User."}
-            </p>
+      <div
+        className="flex flex-col gap-6 w-full font-light items-start justify-between 
+      text-xl mx-auto max-w-lg   max-md:items-center  max-md:justify-center"
+      >
+        <div className="flex max-md:flex-col gap-6  w-full">
+          <img
+            src={avatar_url}
+            className="object-cover w-32 h-32 rounded-full border"
+            alt="User Avatar"
+          />
+          <div className="flex flex-col gap-2 text-start max-mditems-center justify-center">
+            <div className="flex flex-col gap-1">
+              <UserRating />
+              <p className=" text-4xl font-bold">
+                {name ? name : "No Name."}
+              </p>{" "}
+              <p className=" text-base text-blue-500 font-normal ">
+                @{login ? login : "No User."}
+              </p>
+            </div>
           </div>
-          <span className="text-gray-700 ">{bio ? bio : "No bio."}</span>
         </div>
+
+        <span className="text-gray-700 text-start text-lg font-light">
+          {bio ? bio : "No bio."}
+        </span>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 w-full rounded-xl bg-gray-100 p-4 border gap-4">
           <UserNumbers num={followers} title="Followers" />
